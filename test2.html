@@ -32,7 +32,7 @@
                 precision ${precision} float;
 
                 bool isnan(float x) {
-                    return (x > 0.0 || x < 0.0) ? x != x : x != 0.0;
+                    return !(val < 0.0 || 0.0 < val || val == 0.0);
                 }
 
                 varying float vValue;
