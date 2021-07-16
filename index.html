@@ -5,12 +5,19 @@
     <title>NaN Test</title>
 </head>
 <body>
+    <textarea id="function" cols="200">(x > 0.0 || x < 0.0) ? x != x : x != 0.0</textarea>
+    <button id="button">Run</button>
+    <div id="test-area"></div>
     <script>
+        const textArea = document.getElementById("function");
+        const testDiv = document.getElementById("test-area");
+        let test = textArea.value;
+
         function testNan(precision) {
             const canvas = document.createElement("canvas");
             canvas.width = 100;
             canvas.height = 100;
-            document.body.appendChild(canvas);
+            testDiv.appendChild(canvas);
 
             const gl = canvas.getContext("webgl");
 
@@ -32,7 +39,7 @@
                 precision ${precision} float;
 
                 bool isnan(float x) {
-                    return (x > 0.0 || x < 0.0) ? x != x : x != 0.0;
+                    return ${test};
                 }
 
                 varying float vValue;
@@ -79,6 +86,12 @@
         }
 
         ["lowp", "mediump", "highp"].forEach(testNan);
+
+        document.getElementById("button").addEventListener("click", () => {
+            test = textArea.value;
+            testDiv.innerHTML = "";
+            ["lowp", "mediump", "highp"].forEach(testNan);
+        });
     </script>
 </body>
 </html>
