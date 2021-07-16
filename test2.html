@@ -5,7 +5,7 @@
     <title>NaN Test</title>
 </head>
 <body>
-    Again
+    Hello
     <script>
         function testNan(precision) {
             const canvas = document.createElement("canvas");
@@ -33,7 +33,7 @@
                 precision ${precision} float;
 
                 bool isnan(float x) {
-                    return !(x < 0.0 || 0.0 < x || x == 0.0);
+                    return x != x;
                 }
 
                 varying float vValue;
